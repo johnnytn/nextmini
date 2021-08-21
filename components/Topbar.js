@@ -48,7 +48,7 @@ function Topbar({ openAuthModal }) {
           <NextLink href="/" passHref>
             <Link>
               <Heading size="md" mr={4} display={['none', 'block']}>
-                lucasnhimi.io
+                nextmini.vercel.app
               </Heading>
             </Link>
           </NextLink>
@@ -56,10 +56,10 @@ function Topbar({ openAuthModal }) {
             <Link mr={4}>Home</Link>
           </NextLink>
           <NextLink href="/#series" passHref>
-            <Link mr={4}>Séries</Link>
+            <Link mr={4}>Series</Link>
           </NextLink>
           <NextLink href="/about" passHref>
-            <Link>Sobre</Link>
+            <Link>About</Link>
           </NextLink>
         </Flex>
         <Flex justifyContent="center" alignItems="center">
@@ -73,14 +73,14 @@ function Topbar({ openAuthModal }) {
                 size="sm"
               />
               <MenuList>
-                <MenuItem>Perfil</MenuItem>
-                <MenuItem>Meus vídeos</MenuItem>
-                <MenuItem onClick={() => signout()}>Sair</MenuItem>
+                <MenuItem>Profile</MenuItem>
+                <MenuItem>My videos</MenuItem>
+                <MenuItem onClick={() => signout()}>Sign out</MenuItem>
               </MenuList>
             </Menu>
           ) : (
             <Button mr={6} onClick={() => openAuthModal()}>
-              Entrar
+              Sign in
             </Button>
           )}
           {colorMode === 'light' ? (

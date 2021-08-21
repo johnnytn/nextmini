@@ -75,7 +75,7 @@ const Cover = ({ technologies }) => {
         >
           <Link onClick={handleShowAllTechnologies}>
             <Text fontSize="sm" textAlign="center" fontWeight="bold" mt={2}>
-              {`+${hiddenTechnologies} outras`}
+              {`+${hiddenTechnologies} other`}
             </Text>
           </Link>
         </Center>
@@ -98,17 +98,15 @@ const Cover = ({ technologies }) => {
             mb={4}
             fontWeight="xBold"
           >
-            Aprenda programação
-            <Box>direto ao ponto </Box>
+            Coding 101
+            <Box>from zero to hero </Box>
             <Box bgGradient="linear(to-l, #7928CA,#FF0080)" bgClip="text">
               100% free.
             </Box>
           </Heading>
           <Text fontSize={{ base: '16px', md: '20px', lg: '22px' }}>
-            <Box>
-              Mantenha seus conhecimentos atualizados com as mais novas{' '}
-            </Box>
-            <Box>tecnologias que estão disponíveis no mercado!</Box>
+            <Box>Keep your knowledge update with the newest </Box>
+            <Box>technologies in the market!</Box>
           </Text>
           <Box>
             <Button
@@ -119,7 +117,7 @@ const Cover = ({ technologies }) => {
               size="lg"
               href="#series"
             >
-              Bora começar!
+              Get started
             </Button>
           </Box>
           <Box>
@@ -138,7 +136,7 @@ const Series = ({ series }) =>
   series ? (
     <Flex id="series" justify="center">
       <Flex w="full" maxW="1200px" px={[4, 8]} mt={10} direction="column">
-        <Heading mb={4}>Séries</Heading>
+        <Heading mb={4}>Series</Heading>
         <SimpleGrid columns={[1, null, 3]} spacing="40px">
           {(series || []).map((s) => (
             <SerieCard serie={s} key={s.id} />
@@ -151,7 +149,6 @@ const Series = ({ series }) =>
   )
 
 export default function Home({ technologies, series }) {
-  console.log({ series })
   // Box bg="orange" w="100%" p={4}
   return (
     <Layout>

@@ -6,7 +6,7 @@ const Footer = () => (
   <Flex mb={8} mt={24} justify="center">
     <NextLink href="/privacy" passHref>
       <Link fontSize="sm" mr={4} fontWeight="medium" color="gray.500">
-        Privacidade
+        Privacy
       </Link>
     </NextLink>
     <Link
@@ -15,7 +15,7 @@ const Footer = () => (
       fontWeight="medium"
       color="gray.500"
       target="_blank"
-      href="https://www.youtube.com/channel/UCVE9-HO_GzLtDK4IGKVSYXA"
+      href="https://www.youtube.com/channel/xxxxxx"
     >
       YouTube
     </Link>
@@ -25,7 +25,7 @@ const Footer = () => (
       fontWeight="medium"
       color="gray.500"
       target="_blank"
-      href="https://www.instagram.com/lucasnhimi"
+      href="https://www.instagram.com/johnnytn_gs"
     >
       Instagram
     </Link>
@@ -35,7 +35,7 @@ const Footer = () => (
       fontWeight="medium"
       color="gray.500"
       target="_blank"
-      href="https://www.linkedin.com/in/lucasnhimi"
+      href="https://www.linkedin.com/in/johnnytn"
     >
       LinkedIn
     </Link>
