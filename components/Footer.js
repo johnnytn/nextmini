@@ -1,6 +1,6 @@
-import React from 'react';
-import NextLink from 'next/link';
-import { Link, Flex } from '@chakra-ui/react';
+import React from 'react'
+import NextLink from 'next/link'
+import { Link, Flex } from '@chakra-ui/react'
 
 const Footer = () => (
   <Flex mb={8} mt={24} justify="center">
@@ -40,6 +40,6 @@ const Footer = () => (
       LinkedIn
     </Link>
   </Flex>
-);
+)
 
-export default Footer;
+export default Footer

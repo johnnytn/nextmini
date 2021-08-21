@@ -13,7 +13,6 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import Image from 'next/image'
-import useAuth from 'src/hooks/useAuth'
 import Layout from 'src/components/Layout'
 import Footer from 'src/components/Footer'
 import SerieCard from 'src/components/serie/SerieCard'
@@ -25,6 +24,7 @@ const Cover = ({ technologies }) => {
 
   const handleShowAllTechnologies = () => {
     const tecs = currentTechnologies.map((t) => {
+      // eslint-disable-next-line no-param-reassign
       t.defaultVisible = true
       return t
     })
@@ -75,7 +75,7 @@ const Cover = ({ technologies }) => {
         >
           <Link onClick={handleShowAllTechnologies}>
             <Text fontSize="sm" textAlign="center" fontWeight="bold" mt={2}>
-              {`+${ hiddenTechnologies } outras`}
+              {`+${hiddenTechnologies} outras`}
             </Text>
           </Link>
         </Center>

@@ -1,4 +1,4 @@
-import { Box, Flex, useColorModeValue, Button } from '@chakra-ui/react'
+import { Box, Flex, useColorModeValue } from '@chakra-ui/react'
 import Topbar from './Topbar'
 
 function Layout({ children }) {

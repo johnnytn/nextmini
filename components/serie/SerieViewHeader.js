@@ -15,10 +15,8 @@ const SerieViewHeader = ({ serie }) => {
   const router = useRouter()
 
   const handleStartNow = () => {
-    if (!user) {
-      ''
-    } else {
-      router.push(`/player/${ serie.slug }`)
+    if (user) {
+      router.push(`/player/${serie.slug}`)
     }
   }
 
@@ -30,7 +28,7 @@ const SerieViewHeader = ({ serie }) => {
             {serie.name}
           </Heading>
           <Text fontSize="sm" my={2}>
-            {`ultima atualização ${ serie.updatedAt }`}
+            {`ultima atualização ${serie.updatedAt}`}
           </Text>
           <Box>
             <Button onClick={handleStartNow} variant="outline">

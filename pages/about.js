@@ -1,4 +1,4 @@
-import Layout from 'src/components/Layout';
+import Layout from 'src/components/Layout'
 import {
   Avatar,
   Box,
@@ -7,9 +7,9 @@ import {
   Text,
   Icon,
   Stack,
-  Link,
-} from '@chakra-ui/react';
-import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
+  Link
+} from '@chakra-ui/react'
+import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa'
 
 function About() {
   return (
@@ -25,16 +25,16 @@ function About() {
           direction="column"
         >
           <Heading as="h3" size="xl" mb={2}>
-            @lucasnhimi
+            @johnnytn_gs
           </Heading>
           <Stack direction="row" spacing={2}>
-            <Link href="https://www.instagram.com/lucasnhimi">
+            <Link href="https://www.instagram.com/johnnytn_gs">
               <Icon w={6} h={6} as={FaInstagram} />
             </Link>
-            <Link href="https://www.linkedin.com/in/lucasnhimi">
+            <Link href="https://www.linkedin.com/in/johnnytn">
               <Icon w={6} h={6} as={FaLinkedin} />
             </Link>
-            <Link href="https://www.youtube.com/channel/UCVE9-HO_GzLtDK4IGKVSYXA">
+            <Link href="https://www.youtube.com/channel/xxxx">
               <Icon w={6} h={6} as={FaYoutube} />
             </Link>
           </Stack>
@@ -67,7 +67,7 @@ function About() {
         </Flex>
       </Box>
     </Layout>
-  );
+  )
 }
 
-export default About;
+export default About

@@ -50,7 +50,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               _hover={{ bg: 'gray.100' }}
               _active={{
                 bg: 'gray.100',
-                transform: 'scale(0.95)',
+                transform: 'scale(0.95)'
               }}
             >
               Continue with Google
@@ -66,7 +66,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               _hover={{ bg: 'gray.100' }}
               _active={{
                 bg: 'gray.100',
-                transform: 'scale(0.95)',
+                transform: 'scale(0.95)'
               }}
             >
               Continue with Github

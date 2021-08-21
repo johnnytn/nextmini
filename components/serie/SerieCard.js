@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 import { Box, Badge, Image, Text } from '@chakra-ui/react'
 
 function SerieCard({ serie }) {
@@ -43,7 +43,7 @@ function SerieCard({ serie }) {
             display: '-webkit-box',
             '-webkit-line-clamp': '3',
             overflow: 'hidden',
-            '-webkit-box-orient': 'vertical',
+            '-webkit-box-orient': 'vertical'
           }}
           fontSize="sm"
         >

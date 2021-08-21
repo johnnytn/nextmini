@@ -1,9 +1,5 @@
 function Player() {
-  return (
-    <div>
-      player
-    </div>
-  )
+  return <div>player</div>
 }
 
 export default Player

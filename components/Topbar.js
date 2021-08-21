@@ -1,8 +1,7 @@
-import NextLink from 'next/link';
+import NextLink from 'next/link'
 import {
   Flex,
   Link,
-  Icon,
   useColorMode,
   useColorModeValue,
   Button,
@@ -12,17 +11,17 @@ import {
   MenuList,
   MenuItem,
   Heading
-} from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import useAuth from 'src/hooks/useAuth';
-import withAuthModal from './Auth';
+} from '@chakra-ui/react'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+import useAuth from 'src/hooks/useAuth'
+import withAuthModal from './Auth'
 
 function Topbar({ openAuthModal }) {
-  const { user, signout } = useAuth();
-  const { colorMode, toggleColorMode } = useColorMode();
-  const bg = useColorModeValue('#FFFFFF', '#1A202C');
-  const color = useColorModeValue('#1A202C', '#EDEEEE');
-  const borderColor = useColorModeValue('#DDD', '#27272A');
+  const { user, signout } = useAuth()
+  const { colorMode, toggleColorMode } = useColorMode()
+  const bg = useColorModeValue('#FFFFFF', '#1A202C')
+  const color = useColorModeValue('#1A202C', '#EDEEEE')
+  const borderColor = useColorModeValue('#DDD', '#27272A')
 
   return (
     <Flex
