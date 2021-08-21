@@ -1,49 +1,103 @@
 import { createContext, useState } from 'react'
-import firebase from '../lib/firebase'
 import Router from 'next/router'
+import cookie from 'js-cookie'
+import firebase from '../lib/firebase'
+
 const AuthContext = createContext()
 
-export function AuthProvider ({ children }) {
+const formatUser = async (user) => ({
+  uid: user.uid,
+  email: user.email,
+  name: user.displayName,
+  token: user.za,
+  provider: user.providerData[0].providerId,
+  photoUrl: user.photoUrl
+})
+
+export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  const signin = () => {
+
+  const setSession = (session) => {
+    if (session) {
+      cookie.set('nextmini-auth', session, {
+        expires: 1
+      })
+    } else {
+      cookie.remove('nextmini-auth')
+    }
+  }
+
+  const handleUser = async (currentUser) => {
+    if (currentUser) {
+      const formatedUser = await formatUser(currentUser)
+      setUser(formatedUser)
+      // Router.push('/dashboard')
+      setSession(true)
+      return formatedUser
+    }
+    setUser(null)
+    setSession(false)
+    // Router.push('/')
+    return null
+  }
+
+  const signinGitHub = async () => {
     try {
       setLoading(true)
-      return firebase
+      const response = await firebase
         .auth()
         .signInWithPopup(new firebase.auth.GithubAuthProvider())
-        .then((response) => {
-          setUser(response.user)
-          Router.push('/dashboard')
-        })
+
+      handleUser(response.user)
+
+      /* .then((response) => {
+        setUser(formatUser(response.user))
+        Router.push('/dashboard')
+      }) */
     } finally {
       setLoading(false)
     }
   }
-  const singout = () => {
+
+  const signinGoogle = async () => {
+    try {
+      setLoading(true)
+      const response = await firebase
+        .auth()
+        .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+
+      handleUser(response.user)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const signout = async () => {
     try {
       Router.push('/')
-      return firebase
-        .auth()
-        .singout()
-        .then(() => {
-          setUser(null)
-        })
+      await firebase.auth().signOut()
+      handleUser(null)
     } finally {
       setLoading(false)
     }
   }
-  return <AuthContext.Provider
-    value={ {
-      user,
-      loading,
-      signin,
-      singout
-    } }
-  >{ children }
-  </AuthContext.Provider>
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        signinGoogle,
+        signinGitHub,
+        signout
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
-export const AuthConsumer = AuthContext.AuthConsumer
+export const { AuthConsumer } = AuthContext
 
 export default AuthContext
