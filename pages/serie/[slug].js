@@ -37,7 +37,7 @@ export const getStaticPaths = async () => {
   // const slug = params?.params
   const series = (await getAllFullSeries()) || []
   const slugs = series.map((s) => ({ params: { slug: s.slug } }))
-
+  console.log(slugs)
   return {
     paths: slugs,
     fallback: false
