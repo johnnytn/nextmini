@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import {
   Heading,
   Button,
@@ -25,9 +26,6 @@ async function getMovies(search) {
   }
   return null
 }
-
-// const handle
-
 const Cover = () => {
   const { user } = useAuth()
   const toast = useToast()
@@ -84,8 +82,7 @@ const Cover = () => {
         </Box>
       </Heading>
       <Text fontSize={{ base: '16px', md: '20px', lg: '22px' }}>
-        <Box>Keep your knowledge update with the newest </Box>
-        <Box>movienologies in the market!</Box>
+        <Box>Keep your mind at easy </Box>
       </Text>
       <Box>
         <Button
@@ -96,7 +93,7 @@ const Cover = () => {
           size="lg"
           onClick={handleisSearching}
         >
-          Get started
+          Let's search
         </Button>
       </Box>
     </Flex>
@@ -130,7 +127,7 @@ const Cover = () => {
           {renderMovies()}
         </Flex>
         <Text fontSize={{ base: '16px', md: '20px', lg: '22px' }}>
-          <Box textAlign="center">Type and search!</Box>
+          <Box textAlign="center">Type and search !</Box>
         </Text>
       </Heading>
     </Flex>

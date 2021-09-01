@@ -73,6 +73,7 @@ function Topbar({ openAuthModal }) {
                 name={user.name}
                 src={user.photoUrl}
                 size="sm"
+                display="block"
               />
               <MenuList>
                 <MenuItem>Profile</MenuItem>

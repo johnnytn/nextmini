@@ -36,7 +36,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               Login
             </Heading>
             <Text fontSize="md" textAlign="center" mb={5}>
-              To have full access login
+              Wanna have full access ?
             </Text>
             <Button
               onClick={() => handleSigninGoogle()}
