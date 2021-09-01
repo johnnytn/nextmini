@@ -79,7 +79,6 @@ const Cover = ({ movies, onRemoveMovie }) => {
               </Text>
             </Flex>
             <Box>
-              {/* <StarIcon w={6} h={6} onClick={handleSearch} /> */}
               <Button
                 as="a"
                 m={10}
@@ -118,11 +117,10 @@ export default function Favorites() {
   useEffect(() => {
     getMovies(user, setMovies)
   }, [])
-  function handleRemoveMovie(movie) {
+  const handleRemoveMovie = (movie) => {
     const index = movies.findIndex((mm) => mm.uid === movie.uid)
     const newMovies = [...movies]
     newMovies.splice(index, 1)
-    console.log(newMovies)
     removeMovie(movie)
     setMovies(newMovies)
     toast({

@@ -66,7 +66,7 @@ function CardMovie({ movie, handleAddFavorite, user }) {
                     px="5"
                     onClick={() => handleAddFavorite(movie)}
                   >
-                    Add to Fav
+                    Add to Favorite
                   </Button>
                 )}
               </Box>
