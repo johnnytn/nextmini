@@ -14,24 +14,7 @@ const formatUser = async (user) => ({
   photoUrl: user.photoUrl
 })
 
-/* const addUser = (db, user) => {
-  db.collection('users')
-    .add({
-      uid: user.uid,
-      email: user.email,
-      name: user.name
-    })
-    .then((docRef) => {
-      console.log("Document written with ID: ", docRef.id)
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error)
-    })
-} */
-
 export function AuthProvider({ children }) {
-  const db = firebase.firestore() // .collection('users')
-
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 

@@ -33,11 +33,10 @@ const AuthModal = ({ isOpen, onClose }) => {
         <ModalBody>
           <Flex align="center" direction="column" justify="center" minH="250px">
             <Heading fontSize="xl" textAlign="center" mb={3}>
-              Login gratuito!
+              Login
             </Heading>
             <Text fontSize="md" textAlign="center" mb={5}>
-              Para continuar o acesso, faço o login utilizando algum dos
-              serviços abaixo:
+              To have full access login
             </Text>
             <Button
               onClick={() => handleSigninGoogle()}
@@ -45,7 +44,6 @@ const AuthModal = ({ isOpen, onClose }) => {
               color="gray.900"
               variant="outline"
               fontWeight="medium"
-              // leftIcon="google"
               mt={4}
               _hover={{ bg: 'gray.100' }}
               _active={{
@@ -53,7 +51,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                 transform: 'scale(0.95)'
               }}
             >
-              Continue with Google
+              Sign in with Google
             </Button>
             <Button
               onClick={() => handleSigninGithub()}
@@ -69,7 +67,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                 transform: 'scale(0.95)'
               }}
             >
-              Continue with Github
+              Sign in with Github
             </Button>
           </Flex>
         </ModalBody>

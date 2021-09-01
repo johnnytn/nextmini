@@ -3,7 +3,7 @@ import axios from 'axios'
 const getMovies = async (search) => {
   const { OMD_API } = process.env
   const params = `&s=${search}`
-  const url = `http://www.omdbapi.com/?apikey=${ OMD_API }${ params }`
+  const url = `http://www.omdbapi.com/?apikey=${OMD_API}${params}`
   const response = await axios.post(url, {})
   return response.data
 }

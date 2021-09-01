@@ -55,12 +55,11 @@ function Topbar({ openAuthModal }) {
           <NextLink href="/" passHref>
             <Link mr={4}>Home</Link>
           </NextLink>
-          <NextLink href="/favorites" passHref>
-            <Link mr={4}>Favorites</Link>
-          </NextLink>
-          {/* <NextLink href="/#series" passHref>
-            <Link mr={4}>Series</Link>
-          </NextLink> */}
+          {user && (
+            <NextLink href="/favorites" passHref>
+              <Link mr={4}>Favorites</Link>
+            </NextLink>
+          )}
           <NextLink href="/about" passHref>
             <Link>About</Link>
           </NextLink>
@@ -77,7 +76,13 @@ function Topbar({ openAuthModal }) {
               />
               <MenuList>
                 <MenuItem>Profile</MenuItem>
-                <MenuItem>My videos</MenuItem>
+                {user && (
+                  <MenuItem>
+                    <NextLink href="/favorites" passHref>
+                      <Link mr={4}>Favorites</Link>
+                    </NextLink>
+                  </MenuItem>
+                )}
                 <MenuItem onClick={() => signout()}>Sign out</MenuItem>
               </MenuList>
             </Menu>

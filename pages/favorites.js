@@ -1,33 +1,27 @@
 import {
-  Heading,
   Button,
   Flex,
   Text,
   Box,
-  SimpleGrid,
   useColorModeValue,
-  Wrap,
-  WrapItem,
-  Center,
-  Link,
-  Input
+  useToast
 } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Layout from 'src/components/Layout'
 import Footer from 'src/components/Footer'
 import useAuth from 'src/hooks/useAuth'
-import { getMoviesByUser, getUser, removeMovie } from '../lib/firebase'
+import { getMoviesByUser, removeMovie } from '../lib/firebase'
 
 const getMovies = async (user, setMovies) => {
   if (user) {
     const movies = await getMoviesByUser(user.uid)
     setMovies(movies)
-  } else {
+  } /* else {
     const u = await getUser('R4uyxpQeNoYIfYHdraQxNXozvp62')
     const movies = await getMoviesByUser(u.uid)
     setMovies(movies)
-  }
+  } */
 }
 
 const Cover = ({ movies, onRemoveMovie }) => {
@@ -119,15 +113,25 @@ const Cover = ({ movies, onRemoveMovie }) => {
 
 export default function Favorites() {
   const { user } = useAuth()
+  const toast = useToast()
   const [movies, setMovies] = useState([])
   useEffect(() => {
     getMovies(user, setMovies)
   }, [])
   function handleRemoveMovie(movie) {
     const index = movies.findIndex((mm) => mm.uid === movie.uid)
-    const newMovies = movies.splice(index, 1)
+    const newMovies = [...movies]
+    newMovies.splice(index, 1)
+    console.log(newMovies)
     removeMovie(movie)
     setMovies(newMovies)
+    toast({
+      title: movie.title,
+      description: 'Removed from the favorites',
+      status: 'success',
+      duration: 9000,
+      isClosable: true
+    })
   }
   return (
     <Layout>

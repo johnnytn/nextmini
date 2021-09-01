@@ -28,7 +28,7 @@ function Privacy() {
           </Text>
         </Flex>
         <Link href="/">
-          <Button mt={10}>Voltar</Button>
+          <Button mt={10}>Back</Button>
         </Link>
       </Flex>
     </Layout>

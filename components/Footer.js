@@ -9,7 +9,7 @@ const Footer = () => (
         Privacy
       </Link>
     </NextLink>
-    <Link
+    {/*  <Link
       fontSize="sm"
       mr={4}
       fontWeight="medium"
@@ -18,7 +18,7 @@ const Footer = () => (
       href="https://www.youtube.com/channel/xxxxxx"
     >
       YouTube
-    </Link>
+    </Link> */}
     <Link
       fontSize="sm"
       mr={4}
@@ -35,7 +35,7 @@ const Footer = () => (
       fontWeight="medium"
       color="gray.500"
       target="_blank"
-      href="https://www.linkedin.com/in/johnnytn"
+      href="https://www.linkedin.com/in/johnny-goncalves-de-santana-33b040a4"
     >
       LinkedIn
     </Link>

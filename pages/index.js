@@ -4,61 +4,33 @@ import {
   Flex,
   Text,
   Box,
-  SimpleGrid,
   useColorModeValue,
-  Wrap,
-  WrapItem,
-  Center,
-  Link,
+  useToast,
   Input
 } from '@chakra-ui/react'
-import { useState, useEffect } from 'react'
+import { useState /* , useEffect */ } from 'react'
 import Image from 'next/image'
 import Layout from 'src/components/Layout'
 import Footer from 'src/components/Footer'
-/* import SerieCard from 'src/components/serie/SerieCard'
-import { StarIcon } from '@chakra-ui/icons' */
 import useAuth from 'src/hooks/useAuth'
 import axios from 'axios'
 import { addMovie } from '../lib/firebase'
 
 async function getMovies(search) {
   try {
-    const response = await axios.get(`/api/movies?search=${ search }`)
+    const response = await axios.get(`/api/movies?search=${search}`)
     return response?.data?.Search
   } catch (error) {
     console.error(error)
   }
   return null
 }
-/* async function addToFavorite(movie) {
-  try {
-    const response = await axios.post(`/api/movies?search=${ search }`)
-    return response?.data?.Search
-  } catch (error) {
-    console.error(error)
-  }
-  return null
-} */
-/* const addMovie = (movie, user) => {
-  db.collection('movies')
-    .add({
-      poster: movie.Poster,
-      title: movie.Title,
-      type: movie.Type,
-      imdbID: movie.imdbID,
-      userId: user.uid
-    })
-    .then((docRef) => {
-      console.log(`Document written with ID: `, docRef.id)
-    })
-    .catch((error) => {
-      console.error(`Error adding document: `, error)
-    })
-} */
+
+// const handle
 
 const Cover = () => {
   const { user } = useAuth()
+  const toast = useToast()
   const [search, setSearch] = useState('')
   const [isSearching, setIsSearching] = useState(false)
   const [movies, setMovies] = useState([])
@@ -68,19 +40,23 @@ const Cover = () => {
     setSearch(event.target.value)
   }
   const handleSearch = async () => {
-    // setIsSearching(!search)
     const m = await getMovies(search)
     setMovies(m)
-    // console.log({movies})
   }
   const handleisSearching = () => {
     setIsSearching(!search)
   }
 
-  const handleAddFavorite = async (fav) => {
-    const added = await addMovie(fav, user)
+  const handleAddFavorite = async (movie) => {
+    const added = await addMovie(movie, user)
     if (added) {
-      alert('yay')
+      toast({
+        title: `${movie.Title}`,
+        description: 'Added to the favorites',
+        status: 'success',
+        duration: 9000,
+        isClosable: true
+      })
     }
   }
 
@@ -137,18 +113,20 @@ const Cover = () => {
               </Text>
             </Flex>
             <Box>
-             {/* <StarIcon w={6} h={6} onClick={handleSearch} /> */}
-              {user && <Button
-                as="a"
-                m={10}
-                colorScheme="purple"
-                variant="outline"
-                size="lg"
-                px="5"
-                onClick={() => handleAddFavorite(movie)}
-              >
-                Add to Fav
-              </Button>}
+              {/* <StarIcon w={6} h={6} onClick={handleSearch} /> */}
+              {user && (
+                <Button
+                  as="a"
+                  m={10}
+                  colorScheme="purple"
+                  variant="outline"
+                  size="lg"
+                  px="5"
+                  onClick={() => handleAddFavorite(movie)}
+                >
+                  Add to Fav
+                </Button>
+              )}
             </Box>
           </Flex>
         </Flex>
@@ -163,7 +141,7 @@ const Cover = () => {
         mb={4}
         fontWeight="xBold"
       >
-        Let's find a movie?
+        Shall we find a movie?
         <Box bgGradient="linear(to-l, #7928CA,#FF0080)" bgClip="text">
           100% free.
         </Box>
@@ -184,9 +162,11 @@ const Cover = () => {
           Get started
         </Button>
       </Box>
-    </Flex>)
+    </Flex>
+  )
 
-  const renderSearchBar = () => (<Flex px={[4, 8]} py={[0, 20]} w="full" maxW="1200px" direction="column">
+  const renderSearchBar = () => (
+    <Flex px={[4, 8]} py={[0, 20]} w="full" maxW="1200px" direction="column">
       <Heading
         as="h1"
         fontSize={{ base: '42px', md: '52px', lg: '72px' }}
@@ -228,9 +208,6 @@ const Cover = () => {
 }
 
 export default function Home() {
-  useEffect(() => {
-    /* getMovies() */
-  }, [])
   return (
     <Layout>
       <Box pb={10}>
@@ -240,16 +217,3 @@ export default function Home() {
     </Layout>
   )
 }
-
-/* export const getStaticProps = async () => {
-  const movienologies = (await getAllmovienologies()) || []
-  const series = (await getAllSeries()) || []
-  return {
-    props: {
-      movienologies,
-      series
-    },
-    revalidate: 120
-  }
-}
- */
