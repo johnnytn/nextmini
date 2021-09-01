@@ -55,9 +55,12 @@ function Topbar({ openAuthModal }) {
           <NextLink href="/" passHref>
             <Link mr={4}>Home</Link>
           </NextLink>
-          <NextLink href="/#series" passHref>
-            <Link mr={4}>Series</Link>
+          <NextLink href="/favorites" passHref>
+            <Link mr={4}>Favorites</Link>
           </NextLink>
+          {/* <NextLink href="/#series" passHref>
+            <Link mr={4}>Series</Link>
+          </NextLink> */}
           <NextLink href="/about" passHref>
             <Link>About</Link>
           </NextLink>

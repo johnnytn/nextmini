@@ -9,105 +9,192 @@ import {
   Wrap,
   WrapItem,
   Center,
-  Link
+  Link,
+  Input
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Layout from 'src/components/Layout'
 import Footer from 'src/components/Footer'
-import SerieCard from 'src/components/serie/SerieCard'
-import { getAllTechnologies, getAllSeries } from 'src/lib/dato-cms'
+/* import SerieCard from 'src/components/serie/SerieCard'
+import { StarIcon } from '@chakra-ui/icons' */
+import useAuth from 'src/hooks/useAuth'
+import axios from 'axios'
+import { addMovie } from '../lib/firebase'
 
-const Cover = ({ technologies }) => {
-  const [currentTechnologies, setTechnologies] = useState(technologies)
+async function getMovies(search) {
+  try {
+    const response = await axios.get(`/api/movies?search=${ search }`)
+    return response?.data?.Search
+  } catch (error) {
+    console.error(error)
+  }
+  return null
+}
+/* async function addToFavorite(movie) {
+  try {
+    const response = await axios.post(`/api/movies?search=${ search }`)
+    return response?.data?.Search
+  } catch (error) {
+    console.error(error)
+  }
+  return null
+} */
+/* const addMovie = (movie, user) => {
+  db.collection('movies')
+    .add({
+      poster: movie.Poster,
+      title: movie.Title,
+      type: movie.Type,
+      imdbID: movie.imdbID,
+      userId: user.uid
+    })
+    .then((docRef) => {
+      console.log(`Document written with ID: `, docRef.id)
+    })
+    .catch((error) => {
+      console.error(`Error adding document: `, error)
+    })
+} */
+
+const Cover = () => {
+  const { user } = useAuth()
+  const [search, setSearch] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
+  const [movies, setMovies] = useState([])
   const bgColor = useColorModeValue('#FFFFFF', '#1A202C')
 
-  const handleShowAllTechnologies = () => {
-    const tecs = currentTechnologies.map((t) => {
-      // eslint-disable-next-line no-param-reassign
-      t.defaultVisible = true
-      return t
-    })
-    setTechnologies(tecs)
+  const changeSearch = (event) => {
+    setSearch(event.target.value)
+  }
+  const handleSearch = async () => {
+    // setIsSearching(!search)
+    const m = await getMovies(search)
+    setMovies(m)
+    // console.log({movies})
+  }
+  const handleisSearching = () => {
+    setIsSearching(!search)
   }
 
-  const hiddenTechnologies = currentTechnologies?.filter(
-    (t) => !t.defaultVisible
-  ).length
+  const handleAddFavorite = async (fav) => {
+    const added = await addMovie(fav, user)
+    if (added) {
+      alert('yay')
+    }
+  }
 
-  const renderTechnologies = () =>
-    currentTechnologies
-      ?.filter((f) => f.defaultVisible)
-      ?.map((tech) => (
-        <WrapItem key={tech.name}>
-          <Center
-            w="100px"
-            h="100px"
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            flexDirection="column"
-          >
-            <Image
-              src={tech.logo.url}
-              alt={tech.name}
-              width={40}
-              height={40}
-              title={tech.name}
-            />
-            <Text fontSize="sm" textAlign="center" fontWeight="bold" mt={2}>
-              {tech.name}
-            </Text>
-          </Center>
-        </WrapItem>
-      ))
-
-  const renderHiddenTechnologies = () =>
-    hiddenTechnologies > 0 && (
-      <WrapItem>
-        <Center
-          w="100px"
-          h="100px"
+  const renderMovies = () =>
+    (movies || [])?.map((movie) => (
+      <Flex
+        key={movie.imdbID}
+        p="5px"
+        flexDirection="column"
+        alignItems="center"
+      >
+        <Flex
+          w="80vw"
+          h="200px"
           borderWidth="1px"
           borderRadius="lg"
           overflow="hidden"
-          flexDirection="column"
         >
-          <Link onClick={handleShowAllTechnologies}>
-            <Text fontSize="sm" textAlign="center" fontWeight="bold" mt={2}>
-              {`+${hiddenTechnologies} other`}
+          <Image
+            src={movie.Poster}
+            alt={movie.Title}
+            width={150}
+            height={150}
+            title={movie.Title}
+          />
+          <Flex flexDirection="column" alignSelf="center">
+            <Text
+              fontSize="md"
+              textAlign="center"
+              alignSelf="center"
+              fontWeight="bold"
+              px="20px"
+            >
+              {movie.Title}
             </Text>
-          </Link>
-        </Center>
-      </WrapItem>
-    )
-
-  return (
-    <Box bgColor={bgColor}>
-      <Flex justifyContent="center" alignItems="center" py={20}>
-        <Flex
-          px={[4, 8]}
-          py={[0, 20]}
-          w="full"
-          maxW="1200px"
-          direction="column"
-        >
-          <Heading
-            as="h1"
-            fontSize={{ base: '42px', md: '52px', lg: '72px' }}
-            mb={4}
-            fontWeight="xBold"
-          >
-            Coding 101
-            <Box>from zero to hero </Box>
-            <Box bgGradient="linear(to-l, #7928CA,#FF0080)" bgClip="text">
-              100% free.
+            <Flex>
+              <Text
+                fontSize="md"
+                textAlign="center"
+                alignSelf="center"
+                fontWeight="bold"
+                px="20px"
+              >
+                {movie.Year}
+              </Text>
+              <Text
+                fontSize="md"
+                textAlign="center"
+                alignSelf="center"
+                fontWeight="bold"
+                px="20px"
+              >
+                {movie.Type}
+              </Text>
+            </Flex>
+            <Box>
+             {/* <StarIcon w={6} h={6} onClick={handleSearch} /> */}
+              {user && <Button
+                as="a"
+                m={10}
+                colorScheme="purple"
+                variant="outline"
+                size="lg"
+                px="5"
+                onClick={() => handleAddFavorite(movie)}
+              >
+                Add to Fav
+              </Button>}
             </Box>
-          </Heading>
-          <Text fontSize={{ base: '16px', md: '20px', lg: '22px' }}>
-            <Box>Keep your knowledge update with the newest </Box>
-            <Box>technologies in the market!</Box>
-          </Text>
+          </Flex>
+        </Flex>
+      </Flex>
+    ))
+
+  const renderDefaultCover = () => (
+    <Flex px={[4, 8]} py={[0, 20]} w="full" maxW="1200px" direction="column">
+      <Heading
+        as="h1"
+        fontSize={{ base: '42px', md: '52px', lg: '72px' }}
+        mb={4}
+        fontWeight="xBold"
+      >
+        Let's find a movie?
+        <Box bgGradient="linear(to-l, #7928CA,#FF0080)" bgClip="text">
+          100% free.
+        </Box>
+      </Heading>
+      <Text fontSize={{ base: '16px', md: '20px', lg: '22px' }}>
+        <Box>Keep your knowledge update with the newest </Box>
+        <Box>movienologies in the market!</Box>
+      </Text>
+      <Box>
+        <Button
+          as="a"
+          my={10}
+          colorScheme="purple"
+          variant="outline"
+          size="lg"
+          onClick={handleisSearching}
+        >
+          Get started
+        </Button>
+      </Box>
+    </Flex>)
+
+  const renderSearchBar = () => (<Flex px={[4, 8]} py={[0, 20]} w="full" maxW="1200px" direction="column">
+      <Heading
+        as="h1"
+        fontSize={{ base: '42px', md: '52px', lg: '72px' }}
+        mb={4}
+        fontWeight="xBold"
+      >
+        <Flex alignItems="center">
+          <Input p="5" placeholder="Search" onChange={changeSearch} />
           <Box>
             <Button
               as="a"
@@ -115,60 +202,54 @@ const Cover = ({ technologies }) => {
               colorScheme="purple"
               variant="outline"
               size="lg"
-              href="#series"
+              p="5"
+              onClick={handleSearch}
             >
-              Get started
+              Search
             </Button>
           </Box>
-          <Box>
-            <Wrap>
-              {renderTechnologies()}
-              {renderHiddenTechnologies()}
-            </Wrap>
-          </Box>
         </Flex>
+        <Flex p="5px" flexDirection="column">
+          {renderMovies()}
+        </Flex>
+        <Text fontSize={{ base: '16px', md: '20px', lg: '22px' }}>
+          <Box textAlign="center">Type and search!</Box>
+        </Text>
+      </Heading>
+    </Flex>
+  )
+  return (
+    <Box bgColor={bgColor}>
+      <Flex justifyContent="center" alignItems="center" py={20}>
+        {!isSearching ? renderDefaultCover() : renderSearchBar()}
       </Flex>
     </Box>
   )
 }
 
-const Series = ({ series }) =>
-  series ? (
-    <Flex id="series" justify="center">
-      <Flex w="full" maxW="1200px" px={[4, 8]} mt={10} direction="column">
-        <Heading mb={4}>Series</Heading>
-        <SimpleGrid columns={[1, null, 3]} spacing="40px">
-          {(series || []).map((s) => (
-            <SerieCard serie={s} key={s.id} />
-          ))}
-        </SimpleGrid>
-      </Flex>
-    </Flex>
-  ) : (
-    ''
-  )
-
-export default function Home({ technologies, series }) {
-  // Box bg="orange" w="100%" p={4}
+export default function Home() {
+  useEffect(() => {
+    /* getMovies() */
+  }, [])
   return (
     <Layout>
       <Box pb={10}>
-        <Cover technologies={technologies} />
-        <Series series={series} />
+        <Cover />
         <Footer />
       </Box>
     </Layout>
   )
 }
 
-export const getStaticProps = async () => {
-  const technologies = (await getAllTechnologies()) || []
+/* export const getStaticProps = async () => {
+  const movienologies = (await getAllmovienologies()) || []
   const series = (await getAllSeries()) || []
   return {
     props: {
-      technologies,
+      movienologies,
       series
     },
     revalidate: 120
   }
 }
+ */

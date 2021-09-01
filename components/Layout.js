@@ -9,7 +9,6 @@ function Layout({ children }) {
       <Flex flexDirection="column" pt="62px">
         {children}
       </Flex>
-      {/* Layout padrão: {children} */}
     </Box>
   )
 }
