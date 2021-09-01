@@ -9,8 +9,8 @@ import {
   Input
 } from '@chakra-ui/react'
 import { useState /* , useEffect */ } from 'react'
-import Image from 'next/image'
 import Layout from 'src/components/Layout'
+import CardMovie from 'src/components/CardMovie'
 import Footer from 'src/components/Footer'
 import useAuth from 'src/hooks/useAuth'
 import axios from 'axios'
@@ -62,75 +62,12 @@ const Cover = () => {
 
   const renderMovies = () =>
     (movies || [])?.map((movie) => (
-      <Flex
+      <CardMovie
         key={movie.imdbID}
-        p="5px"
-        flexDirection="column"
-        alignItems="center"
-      >
-        <Flex
-          w="80vw"
-          h="200px"
-          borderWidth="1px"
-          borderRadius="lg"
-          overflow="hidden"
-        >
-          <Image
-            src={movie.Poster}
-            alt={movie.Title}
-            width={150}
-            height={150}
-            title={movie.Title}
-          />
-          <Flex flexDirection="column" alignSelf="center">
-            <Text
-              fontSize="md"
-              textAlign="center"
-              alignSelf="center"
-              fontWeight="bold"
-              px="20px"
-            >
-              {movie.Title}
-            </Text>
-            <Flex>
-              <Text
-                fontSize="md"
-                textAlign="center"
-                alignSelf="center"
-                fontWeight="bold"
-                px="20px"
-              >
-                {movie.Year}
-              </Text>
-              <Text
-                fontSize="md"
-                textAlign="center"
-                alignSelf="center"
-                fontWeight="bold"
-                px="20px"
-              >
-                {movie.Type}
-              </Text>
-            </Flex>
-            <Box>
-              {/* <StarIcon w={6} h={6} onClick={handleSearch} /> */}
-              {user && (
-                <Button
-                  as="a"
-                  m={10}
-                  colorScheme="purple"
-                  variant="outline"
-                  size="lg"
-                  px="5"
-                  onClick={() => handleAddFavorite(movie)}
-                >
-                  Add to Fav
-                </Button>
-              )}
-            </Box>
-          </Flex>
-        </Flex>
-      </Flex>
+        movie={movie}
+        user={user}
+        handleAddFavorite={handleAddFavorite}
+      />
     ))
 
   const renderDefaultCover = () => (
