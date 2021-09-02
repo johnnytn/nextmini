@@ -1,9 +1,11 @@
 import React from 'react'
 import NextLink from 'next/link'
 import { Link, Flex } from '@chakra-ui/react'
-
+/* position: absolute;
+    bottom: 0;
+    width: 100%; */
 const Footer = () => (
-  <Flex mb={8} mt={24} justify="center">
+  <Flex mb={8} mt={24} justify="center" position="absolute" bottom="0" w="100%">
     <NextLink href="/privacy" passHref>
       <Link fontSize="sm" mr={4} fontWeight="medium" color="gray.500">
         Privacy

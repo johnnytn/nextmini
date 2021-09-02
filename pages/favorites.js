@@ -17,11 +17,7 @@ const getMovies = async (user, setMovies) => {
   if (user) {
     const movies = await getMoviesByUser(user.uid)
     setMovies(movies)
-  } /* else {
-    const u = await getUser('R4uyxpQeNoYIfYHdraQxNXozvp62')
-    const movies = await getMoviesByUser(u.uid)
-    setMovies(movies)
-  } */
+  }
 }
 
 const Cover = ({ movies, onRemoveMovie }) => {
@@ -118,7 +114,7 @@ export default function Favorites() {
     getMovies(user, setMovies)
   }, [])
   const handleRemoveMovie = (movie) => {
-    const index = movies.findIndex((mm) => mm.uid === movie.uid)
+    const index = movies.findIndex((mm) => mm.imdbID === movie.imdbID)
     const newMovies = [...movies]
     newMovies.splice(index, 1)
     removeMovie(movie)

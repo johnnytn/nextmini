@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Layout from 'src/components/Layout'
 import {
   Avatar,
@@ -31,7 +32,7 @@ function About() {
             <Link href="https://www.instagram.com/johnnytn_gs">
               <Icon w={6} h={6} as={FaInstagram} />
             </Link>
-            <Link href="https://www.linkedin.com/in/johnnytn">
+            <Link href="https://www.linkedin.com/in/johnny-goncalves-de-santana-33b040a4">
               <Icon w={6} h={6} as={FaLinkedin} />
             </Link>
             <Link href="https://www.youtube.com/channel/xxxx">
@@ -58,9 +59,15 @@ function About() {
             </Box>
             <Box mt={10}>
               <Text fontSize="sm">
-                Profissional apaixonado por tecnologia e um eterno aprendiz.
-                Constantemente compartilhando conhecimentos para ajudar na
-                formação e transformação de profissionais da área de tecnologia.
+                "What We people look for when we are looking for a job?" I think
+                we always ask It, but we usually try to turn an easy answer into
+                a multi-head monster. And most of the time the answer is simple,
+                We are looking for a challenge, somewhere we can learn more each
+                day. A place we can give and ask for help with no second
+                thoughts. And I am not just saying a place with good practices
+                and the top tech, They too are always needed but what is It
+                without the real hard-working people behind it? Without
+                coworkers that you can almost call them family?
               </Text>
             </Box>
           </Flex>
